@@ -8,6 +8,21 @@
   Example starting code:
 */
 
+match($path) {
+
+  with(/styleguide/) {
+    # note that this will be served as a 404
+    log("--> Loading static styleguide")
+    $('//html') {
+      remove('./body')
+      insert('body') {
+        inject(read("../assets/static/styleguide.html"))
+      }
+    }
+  }
+
+}
+
 match($status) {
 
   with(/302/) {
@@ -25,20 +40,6 @@ match($status) {
       else() {
         log("--> No page match in mappings.ts")
       }
-    }
-  }
-
-  with(/404/) {
-    # Make an exception for our locally-injected styleguide
-    match($path) {
-      with(/styleguide/) {
-        log("--> Loading static styleguide")
-        export("Status", "200")
-        inject(read("../assets/static/styleguide.html"))
-      }
-    } else() {
-      log("--> STATUS: " + $status + " assuming its an error code pages/error.ts")
-      @import pages/error.ts
     }
   }
 
