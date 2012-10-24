@@ -28,6 +28,20 @@ match($status) {
     }
   }
 
+  with(/404/) {
+    # Make an exception for our locally-injected styleguide
+    match($path) {
+      with(/styleguide/) {
+        log("--> Loading static styleguide")
+        export("Status", "200")
+        inject(read("../assets/static/styleguide.html"))
+      }
+    } else() {
+      log("--> STATUS: " + $status + " assuming its an error code pages/error.ts")
+      @import pages/error.ts
+    }
+  }
+
   else() {
     # not 200 or 302 response status
     log("--> STATUS: " + $status + " assuming its an error code pages/error.ts")
