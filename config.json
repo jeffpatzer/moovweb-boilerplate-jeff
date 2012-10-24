@@ -1,0 +1,7 @@
+{
+	"host_map": [
+		"$.iana.org => www.iana.org",
+		"$.example.com => example.com",
+		"$.example.com => www.example.com"
+	]
+}
