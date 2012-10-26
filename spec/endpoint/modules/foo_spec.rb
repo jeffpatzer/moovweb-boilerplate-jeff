@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "The foo widget" do
+describe "The foo module" do
   %w(bar baz/1).each do |path|
     full_path = "http://www.example.com/#{path}"
     context "on path #{full_path}" do
