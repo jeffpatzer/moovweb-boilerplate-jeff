@@ -13,5 +13,5 @@ task default: ['server']
 
 desc 'Runs moov server and displays errors in growl'
 task 'server' do
-  system 'rvmsudo moov server | tee /dev/tty | while read -r line; do [[ $line =~ "ERROR" ]] && growlnotify -t "Moov error" -m "$line" && echo "$line" >> log/error.log; done'
+  system 'rvmsudo moov server | tee /dev/tty | while read -r line; do [[ $line =~ "ERROR" ]] && growlnotify -s -t "Moov error" -m "$line" && echo "$line" >> log/error.log; done'
 end
